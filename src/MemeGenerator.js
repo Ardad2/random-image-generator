@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import "./style.css"
 
 class MemeGenerator extends Component {
 constructor () 
@@ -7,8 +8,11 @@ constructor ()
     this.state = {
         topText:"",
         bottomText: "",
-        randomImg: "http://i.imgflip.com/1bij.jpg"
+        randomImg: "http://i.imgflip.com/1bij.jpg",
+        allMemeImgs: []
     }
+
+    this.handleChange = this.handleChange.bind(this);
 
 }
 
@@ -22,10 +26,39 @@ componentDidMount() {
         })
 }
 
+handleChange(event) { 
+    const {name, value} = event.target
+    this.setState ({ [name] : value})
+}
+
  render () 
  {
      return ( 
-         <h1>MEME GENERATOR</h1>
+         <div>
+             <form className="meme-form">
+             <input 
+                        type="text"
+                        name="topText"
+                        placeholder="Top Text"
+                        value={this.state.topText}
+                        onChange={???}
+                    /> 
+                    <input 
+                        type="text"
+                        name="bottomText"
+                        placeholder="Bottom Text"
+                        value={this.state.bottomText}
+                        onChange={???}
+                    /> 
+                
+                    <button>Gen</button>
+             </form>
+             <div className="meme">
+                 <img src={this.state.randomImg} alt=""/>
+                 <h2 className="top">{this.state.topText}</h2>
+                 <h2 className="bottom">{this.state.bottomText}</h2>
+             </div>
+         </div>
      )
  }
 
