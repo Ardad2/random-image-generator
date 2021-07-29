@@ -37,14 +37,14 @@ handleSubmit(event) {
              <input 
                         type="text"
                         name="topText"
-                        placeholder="Top Text"
+                        placeholder="Upper Caption"
                         value={this.state.topText}
                         onChange={this.handleChange}
                     /> 
                     <input 
                         type="text"
                         name="bottomText"
-                        placeholder="Bottom Text"
+                        placeholder="Lower Caption"
                         value={this.state.bottomText}
                         onChange={this.handleChange}
                     /> 
