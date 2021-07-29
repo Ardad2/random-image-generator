@@ -1,29 +1,18 @@
 import React, {Component} from "react"
 import "./style.css"
 
-class MemeGenerator extends Component {
+class ImageGenerator extends Component {
 constructor () 
 {
     super();
     this.state = {
         topText:"",
         bottomText: "",
-        randomImg: "http://i.imgflip.com/1bij.jpg",
-        allMemeImgs: []
+        randomImg: "https://picsum.photos/150"
     }
 
     this.handleChange = this.handleChange.bind(this);
-
-}
-
-componentDidMount() {
-    fetch("https://api.imgflip.com/get_memes")
-        .then(response => response.json())
-        .then(response => {
-            const {memes} = response.data
-            console.log(memes[0])
-            this.setState({ allMemeImgs: memes })
-        })
+    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
 handleChange(event) { 
@@ -31,29 +20,38 @@ handleChange(event) {
     this.setState ({ [name] : value})
 }
 
+handleSubmit(event) {
+    fetch("https://picsum.photos/150")
+        .then(response => response.json())
+        .then(response => {
+            const {image} = response.data
+            this.setState({ randomImg: image })
+        })
+}
+
  render () 
  {
      return ( 
          <div>
-             <form className="meme-form">
+             <form className="image-gen-form" onSubmit={this.handleSubmit}>
              <input 
                         type="text"
                         name="topText"
                         placeholder="Top Text"
                         value={this.state.topText}
-                        onChange={???}
+                        onChange={this.handleChange}
                     /> 
                     <input 
                         type="text"
                         name="bottomText"
                         placeholder="Bottom Text"
                         value={this.state.bottomText}
-                        onChange={???}
+                        onChange={this.handleChange}
                     /> 
                 
-                    <button>Gen</button>
+                    <button>New Image</button>
              </form>
-             <div className="meme">
+             <div className="image-gen">
                  <img src={this.state.randomImg} alt=""/>
                  <h2 className="top">{this.state.topText}</h2>
                  <h2 className="bottom">{this.state.bottomText}</h2>
@@ -64,4 +62,4 @@ handleChange(event) {
 
 }
 
-export default MemeGenerator
+export default ImageGenerator
